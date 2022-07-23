@@ -33,19 +33,19 @@
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.UserEntity">
         insert into User(userCode, wechatName, wechatAccount, userName, userPhone,
                          vipFlag, qrCode, createAt, updateAt)
-        values (#{userCode}, #{wechatName}, #{wechatAccount}, #{userName}, #{userPhone},
-                #{vipFlag}, #{qrCode}, now(), now())
+        values (#{userEntity.userCode}, #{userEntity.wechatName}, #{userEntity.wechatAccount}, #{userEntity.userName}, #{userEntity.userPhone},
+                #{userEntity.vipFlag}, #{userEntity.qrCode}, now(), now())
     </insert>
 
     <update id="updateToVip" parameterType="com.tencent.wxcloudrun.entity.UserEntity">
         update User
-        set userName          = #{userName},
-            vipFlag           = #{vipFlag},
-            isRecommend       = #{isRecommend},
-            recommendUserCode = #{recommendUserCode},
+        set userName          = #{userEntity.userName},
+            vipFlag           = #{userEntity.vipFlag},
+            isRecommend       = #{userEntity.isRecommend},
+            recommendUserCode = #{userEntity.recommendUserCode},
             beVipAt           = now(),
             updateAt          = now()
-        where userCode = #{userCode}
+        where userCode = #{userEntity.userCode}
     </update>
 
 </mapper>

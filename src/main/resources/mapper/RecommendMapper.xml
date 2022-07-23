@@ -45,7 +45,7 @@
 
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.RecommendEntity">
         insert into Recommend(userCode, beRecommendUserCode, beenReward, createAt, updateAt)
-        values (#{userCode}, #{beRecommendUserCode}, 0, now(), now())
+        values (#{entity.userCode}, #{entity.beRecommendUserCode}, 0, now(), now())
     </insert>
 
 </mapper>

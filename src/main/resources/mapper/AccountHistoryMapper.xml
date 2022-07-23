@@ -17,7 +17,7 @@
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.AccountHistoryEntity">
         insert into AccountHistory(userCode, change, updateType, addFrom, needAudit, status,
                                    createAt, updateAt)
-        values (#{userCode}, #{change}, #{updateType}, #{addFrom}, #{needAudit}, #{status}, now(), now())
+        values (#{entity.userCode}, #{entity.change}, #{entity.updateType}, #{entity.addFrom}, #{entity.needAudit}, #{entity.status}, now(), now())
     </insert>
 
     <select id="queryById" resultMap="resultObject" parameterType="java.lang.Integer">
