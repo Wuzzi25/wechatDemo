@@ -4,9 +4,9 @@ import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.service.impl.QueryServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * 查询列表相关，全部用get了
  * @author wuzzi
  */
-@Controller
+@RestController
 public class QueryController {
 
     final Logger logger = LoggerFactory.getLogger(QueryController.class);

@@ -18,7 +18,7 @@ CREATE TABLE `User` (
     `qrCode` varchar(200) NOT NULL DEFAULT '' COMMENT '用户二维码，创建时就生成，会员身份时返回给前端',
     `isRecommend` int(11) NOT NULL DEFAULT 0 COMMENT '是否被推荐，0否 1是',
     `recommendUserCode` varchar(36) NOT NULL DEFAULT '' COMMENT '推荐人',
-    `beVipAt` timestamp DEFAULT NULL CURRENT_TIMESTAMP COMMENT '成为会员时间',
+    `beVipAt` timestamp NOT NULL DEFAULT '1999-01-01 00:00:00' COMMENT '成为会员时间',
     `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
@@ -66,4 +66,4 @@ CREATE TABLE `Recommend` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB COLLATE = utf8mb4_unicode_ci DEFAULT CHARSET=utf8mb4;
 
-create unique index uni_recommend_u1_u2 on Recommend(userCode,recommendUserCode);
+create unique index uni_recommend_u1_u2 on Recommend(userCode,beRecommendUserCode);
