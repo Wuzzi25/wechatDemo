@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.AccountMapper">
+
+    <resultMap id="resultObject" type="com.tencent.wxcloudrun.entity.AccountEntity">
+        <id property="id" column="id"/>
+        <result property="userCode" column="userCode" javaType="java.lang.String"/>
+        <result property="balance" column="balance" javaType="java.lang.Float"/>
+        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime"/>
+        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <select id="queryByUserCode" resultMap="resultObject" parameterType="java.lang.String">
+        SELECT *
+        FROM Account
+        WHERE userCode = #{userCode} limit 1
+    </select>
+
+    <insert id="save" parameterType="com.tencent.wxcloudrun.entity.AccountEntity">
+        insert into Account(userCode, balance, createAt, updateAt)
+        values (#{userCode}, 0, now(), now())
+    </insert>
+
+    <update id="update" parameterType="com.tencent.wxcloudrun.entity.AccountEntity">
+        update Account
+        set balance  = #{balance},
+            updateAt = now()
+        where userCode = #{userCode}
+    </update>
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.AccountHistoryMapper">
+
+    <resultMap id="resultObject" type="com.tencent.wxcloudrun.entity.AccountHistoryEntity">
+        <id property="id" column="id"/>
+        <result property="userCode" column="userCode" javaType="java.lang.String"/>
+        <result property="change" column="change" javaType="java.lang.Float"/>
+        <result property="updateType" column="updateType" javaType="java.lang.Integer"/>
+        <result property="addFrom" column="addFrom" javaType="java.lang.String"/>
+        <result property="needAudit" column="needAudit" javaType="java.lang.Integer"/>
+        <result property="status" column="status" javaType="java.lang.Integer"/>
+        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime"/>
+        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <insert id="save" parameterType="com.tencent.wxcloudrun.entity.AccountHistoryEntity">
+        insert into AccountHistory(userCode, change, updateType, addFrom, needAudit, status,
+                                   createAt, updateAt)
+        values (#{userCode}, #{change}, #{updateType}, #{addFrom}, #{needAudit}, #{status}, now(), now())
+    </insert>
+
+    <select id="queryById" resultMap="resultObject" parameterType="java.lang.Integer">
+        SELECT *
+        FROM AccountHistory
+        WHERE id = #{id} limit 1
+    </select>
+
+    <update id="updateById">
+        update AccountHistory
+        set status   = #{status},
+            updateAt = now()
+        where id = #{id}
+    </update>
+
+    <select id="queryByUserCode" resultMap="resultObject" parameterType="java.lang.String">
+        SELECT *
+        FROM AccountHistory
+        WHERE userCode = #{userCode}
+        order by id desc
+    </select>
+
+</mapper>

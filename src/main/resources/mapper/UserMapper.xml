@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.UserMapper">
+
+    <resultMap id="resultObject" type="com.tencent.wxcloudrun.entity.UserEntity">
+        <id property="id" column="id"/>
+        <result property="userCode" column="userCode" javaType="java.lang.String"/>
+        <result property="wechatName" column="wechatName" javaType="java.lang.String"/>
+        <result property="wechatAccount" column="wechatAccount" javaType="java.lang.String"/>
+        <result property="userName" column="userName" javaType="java.lang.String"/>
+        <result property="userPhone" column="userPhone" javaType="java.lang.String"/>
+        <result property="vipFlag" column="vipFlag" javaType="java.lang.Integer"/>
+        <result property="qrCode" column="qrCode" javaType="java.lang.String"/>
+        <result property="isRecommend" column="isRecommend" javaType="java.lang.Integer"/>
+        <result property="recommendUserCode" column="recommendUserCode" javaType="java.lang.String"/>
+        <result property="beVipAt" column="userCode" javaType="java.time.LocalDateTime"/>
+        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime"/>
+        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <select id="queryByUserCode" resultMap="resultObject" parameterType="java.lang.String">
+        SELECT *
+        FROM User
+        WHERE userCode = #{userCode} limit 1
+    </select>
+
+    <select id="queryByWechatAccount" resultMap="resultObject" parameterType="java.lang.String">
+        SELECT *
+        FROM User
+        WHERE wechatAccount = #{wechatAccount} limit 1
+    </select>
+
+    <insert id="save" parameterType="com.tencent.wxcloudrun.entity.UserEntity">
+        insert into User(userCode, wechatName, wechatAccount, userName, userPhone,
+                         vipFlag, qrCode, createAt, updateAt)
+        values (#{userCode}, #{wechatName}, #{wechatAccount}, #{userName}, #{userPhone},
+                #{vipFlag}, #{qrCode}, now(), now())
+    </insert>
+
+    <update id="updateToVip" parameterType="com.tencent.wxcloudrun.entity.UserEntity">
+        update User
+        set userName          = #{userName},
+            vipFlag           = #{vipFlag},
+            isRecommend       = #{isRecommend},
+            recommendUserCode = #{recommendUserCode},
+            beVipAt           = now(),
+            updateAt          = now()
+        where userCode = #{userCode}
+    </update>
+
+</mapper>

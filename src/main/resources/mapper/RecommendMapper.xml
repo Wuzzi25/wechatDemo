@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.RecommendMapper">
+
+    <resultMap id="resultObject" type="com.tencent.wxcloudrun.entity.RecommendEntity">
+        <id property="id" column="id"/>
+        <result property="userCode" column="userCode" javaType="java.lang.String"/>
+        <result property="beRecommendUserCode" column="beRecommendUserCode" javaType="java.lang.String"/>
+        <result property="beenReward" column="beenReward" javaType="java.lang.Integer"/>
+        <result property="createdAt" column="createdAt" javaType="java.time.LocalDateTime"/>
+        <result property="updatedAt" column="updatedAt" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <resultMap id="resultVoObject" type="com.tencent.wxcloudrun.model.RecommendVo">
+        <id property="id" column="id"/>
+        <result property="userCode" column="userCode" javaType="java.lang.String"/>
+        <result property="userName" column="userName" javaType="java.lang.String"/>
+        <result property="beenReward" column="beenReward" javaType="java.lang.Integer"/>
+        <result property="recommendAt" column="recommendAt" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <select id="queryHasNoReward" resultMap="resultObject" parameterType="java.lang.String">
+        SELECT *
+        FROM Recommend
+        WHERE userCode = #{userCode}
+          and beenReward = 0
+    </select>
+
+    <update id="updateByIds" parameterType="java.util.List">
+        update Recommend
+        set beenReward = 1
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="queryByUserCode" resultMap="resultVoObject" parameterType="java.lang.String">
+        SELECT u.userCode as userCode, u.userName as userName, r.beenReward as beenReward, r.createAt as recommendAt
+        FROM Recommend r
+                 JOIN User u ON r.beRecommendUserCode = u.userCode
+        WHERE r.userCode = #{userCode}
+        order by r.id desc
+    </select>
+
+    <insert id="save" parameterType="com.tencent.wxcloudrun.entity.RecommendEntity">
+        insert into Recommend(userCode, beRecommendUserCode, beenReward, createAt, updateAt)
+        values (#{userCode}, #{beRecommendUserCode}, 0, now(), now())
+    </insert>
+
+</mapper>
