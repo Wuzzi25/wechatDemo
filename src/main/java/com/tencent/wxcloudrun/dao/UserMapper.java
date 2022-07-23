@@ -14,8 +14,8 @@ public interface UserMapper {
 
     UserEntity queryByWechatAccount(@Param("wechatAccount") String wechatAccount);
 
-    UserEntity save(@Param("userEntity") UserEntity userEntity);
+    void save(@Param("userEntity") UserEntity userEntity);
 
-    UserEntity updateToVip(@Param("userEntity") UserEntity userEntity);
+    void updateToVip(@Param("userEntity") UserEntity userEntity);
 
 }
