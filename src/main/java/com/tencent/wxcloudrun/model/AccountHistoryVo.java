@@ -18,6 +18,6 @@ public class AccountHistoryVo implements Serializable {
     private String changeType;
     private float change;
     private String status;
-    private Date createAt;
+    private Date createdAt;
 
 }

@@ -36,7 +36,7 @@
     </update>
 
     <select id="queryByUserCode" resultMap="resultVoObject" parameterType="java.lang.String">
-        SELECT u.userCode as userCode, u.userName as userName, r.beenReward as beenReward, r.createAt as recommendAt
+        SELECT u.userCode as userCode, u.userName as userName, r.beenReward as beenReward, r.createdAt as recommendAt
         FROM Recommend r
                  JOIN User u ON r.beRecommendUserCode = u.userCode
         WHERE r.userCode = #{userCode}
@@ -44,7 +44,7 @@
     </select>
 
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.RecommendEntity">
-        insert into Recommend(userCode, beRecommendUserCode, beenReward, createAt, updateAt)
+        insert into Recommend(userCode, beRecommendUserCode, beenReward, createdAt, updatedAt)
         values (#{entity.userCode}, #{entity.beRecommendUserCode}, 0, now(), now())
     </insert>
 

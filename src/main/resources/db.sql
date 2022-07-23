@@ -32,7 +32,7 @@ CREATE TABLE `Account` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `userCode` varchar(36) NOT NULL DEFAULT '' COMMENT '用戶編號，uuid',
    `balance` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '账号余额',
-   `createAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB COLLATE = utf8mb4_unicode_ci DEFAULT CHARSET=utf8mb4;

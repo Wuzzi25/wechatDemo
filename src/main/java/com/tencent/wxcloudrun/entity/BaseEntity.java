@@ -15,7 +15,7 @@ public class BaseEntity implements Serializable {
 
     private int id;
 
-    private Date createAt;
+    private Date createdAt;
 
-    private Date updateAt;
+    private Date updatedAt;
 }

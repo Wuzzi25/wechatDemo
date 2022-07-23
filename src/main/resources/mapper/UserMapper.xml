@@ -32,7 +32,7 @@
 
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.UserEntity">
         insert into User(userCode, wechatName, wechatAccount, userName, userPhone,
-                         vipFlag, qrCode, createAt, updateAt)
+                         vipFlag, qrCode, createdAt, updatedAt)
         values (#{userEntity.userCode}, #{userEntity.wechatName}, #{userEntity.wechatAccount}, #{userEntity.userName}, #{userEntity.userPhone},
                 #{userEntity.vipFlag}, #{userEntity.qrCode}, now(), now())
     </insert>
@@ -44,7 +44,7 @@
             isRecommend       = #{userEntity.isRecommend},
             recommendUserCode = #{userEntity.recommendUserCode},
             beVipAt           = now(),
-            updateAt          = now()
+            updatedAt          = now()
         where userCode = #{userEntity.userCode}
     </update>
 

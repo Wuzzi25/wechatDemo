@@ -17,14 +17,14 @@
     </select>
 
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.AccountEntity">
-        insert into Account(userCode, balance, createAt, updateAt)
+        insert into Account(userCode, balance, createdAt, updatedAt)
         values (#{accountEntity.userCode}, 0, now(), now())
     </insert>
 
     <update id="update" parameterType="com.tencent.wxcloudrun.entity.AccountEntity">
         update Account
         set balance  = #{accountEntity.balance},
-            updateAt = now()
+            updatedAt = now()
         where userCode = #{accountEntity.userCode}
     </update>
 

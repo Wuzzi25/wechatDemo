@@ -16,7 +16,7 @@
 
     <insert id="save" parameterType="com.tencent.wxcloudrun.entity.AccountHistoryEntity">
         insert into AccountHistory(userCode, change, updateType, addFrom, needAudit, status,
-                                   createAt, updateAt)
+                                   createdAt, updatedAt)
         values (#{entity.userCode}, #{entity.change}, #{entity.updateType}, #{entity.addFrom}, #{entity.needAudit}, #{entity.status}, now(), now())
     </insert>
 
@@ -29,7 +29,7 @@
     <update id="updateById">
         update AccountHistory
         set status   = #{status},
-            updateAt = now()
+            updatedAt = now()
         where id = #{id}
     </update>
 
